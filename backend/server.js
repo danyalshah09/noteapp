@@ -5,13 +5,18 @@ import notesRoutes from './src/routes/notesRoutes.js'
 import { connectDB } from "./src/config/db.js";
 import dotenv from "dotenv";
 import rateLimiter from "./src/middleware/rateLimiter.js" ;
-
+import cors from "cors"
 dotenv.config();
 const app = express()
 
 //middleware
 app.use(express.json())
 app.use(rateLimiter)
+app.use(cors(
+    {
+        origin: ["http://localhost:5173"],
+    }
+))
 // custom Middleware
 // app.use((req,res,next)=>{
 //     console.log(`Req Method is ${req.method} & Req URL is ${req.url}`)
